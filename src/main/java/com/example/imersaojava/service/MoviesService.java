@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,30 @@ public class MoviesService {
             System.out.println(movie.get("title"));
             System.out.println("\n \u001b[100m ------------------------------------------------------------------------------------------------------- \u001b[m \n");
         }
+    }
+
+    public static List<String> getPosterMovies() throws IOException, InterruptedException {
+        List<String> posters = new ArrayList<>();
+
+        URI uri = URI.create(TOP_MOVIES_URL);
+
+        var httpClient = newHttpClient();
+
+        HttpRequest request = newBuilder(uri).GET().build();
+
+        HttpResponse<String> response = httpClient.send(request, ofString());
+
+        String body = response.body();
+
+        JSONParser parser = new JSONParser();
+
+        List<Map<String, String>> moviesList = parser.parse(body);
+
+        for (Map<String, String> movie : moviesList) {
+            posters.add(movie.get("image"));
+        }
+
+        return posters;
     }
 
 }
