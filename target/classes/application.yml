@@ -1,0 +1,3 @@
+imersao.java:
+  topmovies.url: https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json
+  popularmovies.url: https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularMovies.json
